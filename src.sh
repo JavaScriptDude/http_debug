@@ -1,7 +1,9 @@
 # http_debug()
 # [url] full url to site including scheme (http/https)
 # [cookie] (-c|--cookie)(opt) Path to cookie file
-# 
+# [ua] (-u|--ua)(opt) User agent string
+# [secure] (-s|--secure)(opt) Tell curl to ignore certificate errors (eg self-signed certificate)
+# [help] (-h|--help)(opt) Show help
 
 http_debug() { 
   
