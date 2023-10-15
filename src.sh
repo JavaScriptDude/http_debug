@@ -1,10 +1,3 @@
-# http_debug()
-# [url] full url to site including scheme (http/https)
-# [cookie] (-c|--cookie)(opt) Path to cookie file
-# [ua] (-u|--ua)(opt) User agent string
-# [secure] (-s|--secure)(opt) Tell curl to ignore certificate errors (eg self-signed certificate)
-# [help] (-h|--help)(opt) Show help
-
 http_debug() { 
   
   local uargs=()
@@ -50,14 +43,10 @@ http_debug() {
       url=(${uargs[0]})
   fi
 
-  
-
   if [ "$help" == true ]; then
     echo "http_debug <url> [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help]"
     OK=false
   fi
-
-  echo here4 $OK
 
   if $OK; then
 
