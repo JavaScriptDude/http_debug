@@ -1,9 +1,11 @@
-# http_debug [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help] [-g|--get] <url>
+#!/bin/bash
+# http_debug()
 # [url] full url to site including scheme (http/https)
-# [cookie] (-c|--cookie)(opt) Path to cookie file
+# [cookie] (-c|--cookie)(opt) Path to cookie file to allow session persistence
 # [ua] (-u|--ua)(opt) User agent string
 # [secure] (-s|--secure)(opt) Tell curl to ignore certificate errors (eg self-signed certificate)
 # [get] (-g|--get)(opt) Use GET instead of HEAD (default)
+# [proxy] (-p|--proxy)(opt) Proxy server to use (eg http://<host>:<port>)
 # [help] (-h|--help)(opt) Show help
 
 http_debug() { 
@@ -18,6 +20,7 @@ http_debug() {
   local timeout=60
   local secure=false
   local http_get=false
+  local proxy=
   # other
   local OK=true
   local msg=
@@ -31,6 +34,7 @@ http_debug() {
           --ua|-u)        ua=$2;          shift 2;;
           --secure|-s)    secure=true;    shift;;
           --get|-g)       http_get=true;  shift;;
+          --proxy|-x)     proxy=$2;       shift 2;;
           *) msg="Invalid option: $1"; OK=false; help=true; break;;
           esac;
       else
@@ -41,7 +45,7 @@ http_debug() {
 
 
   if [ "$help" == true ]; then
-    echo "http_debug [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help] [-g|--get] <url>" 
+    echo "http_debug [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help] [-g|--get] [-p|--proxy] <url>" 
     OK=false
     if [ "$msg" != "" ]; then
       echo "    $msg"
@@ -76,6 +80,10 @@ http_debug() {
 
     if [ "$http_get" == true ]; then
       cmd="$cmd -X GET -H 'Cache-Control: no-cache no-store'"
+    fi
+
+    if [ "$proxy" != "" ]; then
+      cmd="$cmd --proxy $proxy"
     fi
     
 
