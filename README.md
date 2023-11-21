@@ -12,15 +12,16 @@ Restart your console or run `% source ~/.bashrc`
 # Usage
 ```
 % http_debug -h
-http_debug [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help] [-g|--get] <url>
+http_debug [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help] [-g|--get] [-x|--proxy] <url>
 ```
 params:
 ```
 # [url] full url to site including scheme (http/https)
-# [cookie] (-c|--cookie)(opt) Path to cookie file
+# [cookie] (-c|--cookie)(opt) Path to cookie file to allow session persistence
 # [ua] (-u|--ua)(opt) User agent string
 # [secure] (-s|--secure)(opt) Tell curl to ignore certificate errors (eg self-signed certificate)
 # [get] (-g|--get)(opt) Use GET instead of HEAD (default)
+# [proxy] (-x|--proxy)(opt) Proxy server to use (eg http://<host>:<port>)
 # [help] (-h|--help)(opt) Show help
 ```
 
