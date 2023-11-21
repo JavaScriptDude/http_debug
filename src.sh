@@ -5,7 +5,7 @@
 # [ua] (-u|--ua)(opt) User agent string
 # [secure] (-s|--secure)(opt) Tell curl to ignore certificate errors (eg self-signed certificate)
 # [get] (-g|--get)(opt) Use GET instead of HEAD (default)
-# [proxy] (-p|--proxy)(opt) Proxy server to use (eg http://<host>:<port>)
+# [proxy] (-x|--proxy)(opt) Proxy server to use (eg http://<host>:<port>)
 # [help] (-h|--help)(opt) Show help
 
 http_debug() { 
@@ -45,7 +45,7 @@ http_debug() {
 
 
   if [ "$help" == true ]; then
-    echo "http_debug [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help] [-g|--get] [-p|--proxy] <url>" 
+    echo "http_debug [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help] [-g|--get] [-x|--proxy] <url>" 
     OK=false
     if [ "$msg" != "" ]; then
       echo "    $msg"
