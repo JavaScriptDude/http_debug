@@ -87,7 +87,7 @@ http_debug() {
     fi
     
 
-    cmd="$cmd -A \"$ua\" \"$url\" 2>&1 | egrep -v '^> |^< |^{|^}|^* TLS|^* AL|^  0' "
+    cmd="$cmd -A \"$ua\" \"$url\" 2>&1 | egrep -v '^> |^< |^{|^}|^* TLS|^* Expire|^* AL|^  0' "
 
     echo "cmd: $cmd"
 
