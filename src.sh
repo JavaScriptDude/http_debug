@@ -1,3 +1,4 @@
+# https://github.com/JavaScriptDude/http_debug
 #!/bin/bash
 # http_debug()
 # [url] full url to site including scheme (http/https)
@@ -5,6 +6,7 @@
 # [ua] (-u|--ua)(opt) User agent string
 # [secure] (-s|--secure)(opt) Tell curl to ignore certificate errors (eg self-signed certificate)
 # [get] (-g|--get)(opt) Use GET instead of HEAD (default)
+# [data] (-d|--data)(opt) Post data with curl
 # [proxy] (-x|--proxy)(opt) Proxy server to use (eg http://<host>:<port>)
 # [help] (-h|--help)(opt) Show help
 
@@ -20,6 +22,7 @@ http_debug() {
   local timeout=60
   local secure=false
   local http_get=false
+  local data=
   local proxy=
   # other
   local OK=true
@@ -34,6 +37,7 @@ http_debug() {
           --ua|-u)        ua=$2;          shift 2;;
           --secure|-s)    secure=true;    shift;;
           --get|-g)       http_get=true;  shift;;
+          --data|-d)      data=$2;        shift 2;;
           --proxy|-x)     proxy=$2;       shift 2;;
           *) msg="Invalid option: $1"; OK=false; help=true; break;;
           esac;
@@ -45,7 +49,7 @@ http_debug() {
 
 
   if [ "$help" == true ]; then
-    echo "http_debug [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help] [-g|--get] [-x|--proxy] <url>" 
+    echo "http_debug [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help] [-g|--get] [-d|--data <data>] [-x|--proxy] <url>"
     OK=false
     if [ "$msg" != "" ]; then
       echo "    $msg"
@@ -62,6 +66,12 @@ http_debug() {
       url=(${uargs[0]})
   fi
 
+  if [ "$http_get" == true ] && [ "$data" != "" ]; then
+    echo "Error: --get and --data are mutually exclusive."
+    help=true
+    OK=false
+  fi
+
 
 
   if $OK; then
@@ -72,7 +82,13 @@ http_debug() {
       cmd="$cmd -b $cookie"
     fi
     
-    cmd="$cmd -v -I"
+    cmd="$cmd -v"
+
+    if [ "$data" != "" ]; then
+      cmd="$cmd --data '$data'"
+    else
+      cmd="$cmd -I"
+    fi
 
     if [ "$secure" != true ]; then
       cmd="$cmd --insecure"

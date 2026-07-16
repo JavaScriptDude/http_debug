@@ -12,7 +12,7 @@ Restart your console or run `% source ~/.bashrc`
 # Usage
 ```
 % http_debug -h
-http_debug [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help] [-g|--get] [-x|--proxy] <url>
+http_debug [-c|--cookie <cookie>] [-u|--ua <user-agent>] [-s|--secure] [-h|--help] [-g|--get] [-d|--data <data>] [-x|--proxy] <url>
 ```
 params:
 ```
@@ -21,6 +21,7 @@ params:
 # [ua] (-u|--ua)(opt) User agent string
 # [secure] (-s|--secure)(opt) Tell curl to ignore certificate errors (eg self-signed certificate)
 # [get] (-g|--get)(opt) Use GET instead of HEAD (default)
+# [data] (-d|--data)(opt) Post data with curl. Mutually exclusive with --get.
 # [proxy] (-x|--proxy)(opt) Proxy server to use (eg http://<host>:<port>)
 # [help] (-h|--help)(opt) Show help
 ```
